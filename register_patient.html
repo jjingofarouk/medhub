@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Patient</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+    
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="sidebar">
+            <a href="{{ url_for('bp.index') }}"><h2>MedHub</h2></a>
+            <a href="{{ url_for('bp.manage_appointments') }}">Manage Appointments</a>
+            <a href="{{ url_for('bp.book_appointment') }}">Book Appointment</a>
+            <a href="{{ url_for('bp.rebook_appointment') }}">ReBook Appointment</a>
+            <a href="{{ url_for('bp.cancel_appointment') }}">Cancel Appointment</a>
+            <a href="{{ url_for('bp.view_doctor_availability') }}">View Doctor Availability</a>
+            <a href="{{ url_for('bp.edit_availability') }}" class="active">Edit Availability</a>
+            <a href="{{ url_for('bp.consultations') }}">Start Consultation</a>
+            <a href="{{ url_for('bp.view_medical_history') }}">View Medical History</a>
+        </div>
+
+    <div class="main-content">
+        <header>
+            <h1>Patient Registration</h1>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="patientProgressBar"></div>
+            </div>
+        </header>
+        <form id="patientForm" method="POST">
+
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob">
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender">
+                    <option value="genderr">Gender</option>       
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                    <option value="non-binary">Non-binary</option>
+                    <option value="prefer not to say">Prefer not to say</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="district">District:</label>
+                <select id="district" name="district">
+                    <option value="">Select your district</option>
+                    <option value="abim">Abim</option>
+                    <option value="adjumani">Adjumani</option>
+                    <option value="agago">Agago</option>
+                    <option value="alekot">Alebtong</option>
+                    <option value="amolatar">Amolatar</option>
+                    <option value="amudat">Amudat</option>
+                    <option value="amuria">Amuria</option>
+                    <option value="amuru">Amuru</option>
+                    <option value="apac">Apac</option>
+                    <option value="arua">Arua</option>
+                    <option value="budaka">Budaka</option>
+                    <option value="bududa">Bududa</option>
+                    <option value="bugiri">Bugiri</option>
+                    <option value="bugweri">Bugweri</option>
+                    <option value="buhweju">Buhweju</option>
+                    <option value="buikwe">Buikwe</option>
+                    <option value="bukedea">Bukedea</option>
+                    <option value="bukomansimbi">Bukomansimbi</option>
+                    <option value="bukwa">Bukwa</option>
+                    <option value="bulambuli">Bulambuli</option>
+                    <option value="buliisa">Buliisa</option>
+                    <option value="bundibugyo">Bundibugyo</option>
+                    <option value="bushenyi">Bushenyi</option>
+                    <option value="busia">Busia</option>
+                    <option value="butaleja">Butaleja</option>
+                    <option value="butambala">Butambala</option>
+                    <option value="butebo">Butebo</option>
+                    <option value="buvuma">Buvuma</option>
+                    <option value="buyende">Buyende</option>
+                    <option value="dokolo">Dokolo</option>
+                    <option value="gomba">Gomba</option>
+                    <option value="gulu">Gulu</option>
+                    <option value="hoima">Hoima</option>
+                    <option value="ibanda">Ibanda</option>
+                    <option value="iganga">Iganga</option>
+                    <option value="isingiro">Isingiro</option>
+                    <option value="jinja">Jinja</option>
+                    <option value="kaabong">Kaabong</option>
+                    <option value="kabale">Kabale</option>
+                    <option value="kabarole">Kabarole</option>
+                    <option value="kaberamaido">Kaberamaido</option>
+                    <option value="kagadi">Kagadi</option>
+                    <option value="kakumiro">Kakumiro</option>
+                    <option value="kalangala">Kalangala</option>
+                    <option value="kaliro">Kaliro</option>
+                    <option value="kalungu">Kalungu</option>
+                    <option value="kampala">Kampala</option>
+                    <option value="kamuli">Kamuli</option>
+                    <option value="kamwenge">Kamwenge</option>
+                    <option value="kanungu">Kanungu</option>
+                    <option value="kapchorwa">Kapchorwa</option>
+                    <option value="kapelebyong">Kapelebyong</option>
+                    <option value="karenga">Karenga</option>
+                    <option value="kasanda">Kasanda</option>
+                    <option value="kasese">Kasese</option>
+                    <option value="katakwi">Katakwi</option>
+                    <option value="kayunga">Kayunga</option>
+                    <option value="kazo">Kazo</option>
+                    <option value="kibaale">Kibaale</option>
+                    <option value="kiboga">Kiboga</option>
+                    <option value="kibuku">Kibuku</option>
+                    <option value="kigezi">Kigezi</option>
+                    <option value="kiruhura">Kiruhura</option>
+                    <option value="kiryandongo">Kiryandongo</option>
+                    <option value="kisoro">Kisoro</option>
+                    <option value="kitagwenda">Kitagwenda</option>
+                    <option value="kitgum">Kitgum</option>
+                    <option value="koboko">Koboko</option>
+                    <option value="kole">Kole</option>
+                    <option value="kotido">Kotido</option>
+                    <option value="kumi">Kumi</option>
+                    <option value="kwania">Kwania</option>
+                    <option value="kween">Kween</option>
+                    <option value="kyankwanzi">Kyankwanzi</option>
+                    <option value="kyegegwa">Kyegegwa</option>
+                    <option value="kyenjojo">Kyenjojo</option>
+                    <option value="kyotera">Kyotera</option>
+                    <option value="lamwo">Lamwo</option>
+                    <option value="lira">Lira</option>
+                    <option value="luuka">Luuka</option>
+                    <option value="lwengo">Lwengo</option>
+                    <option value="lyantonde">Lyantonde</option>
+                    <option value="manafwa">Manafwa</option>
+                    <option value="maracha">Maracha</option>
+                    <option value="masaka">Masaka</option>
+                    <option value="masindi">Masindi</option>
+                    <option value="mayuge">Mayuge</option>
+                    <option value="mbale">Mbale</option>
+                    <option value="mitooma">Mitooma</option>
+                    <option value="mityana">Mityana</option>
+                    <option value="moroto">Moroto</option>
+                    <option value="moyo">Moyo</option>
+                    <option value="mpigi">Mpigi</option>
+                    <option value="mubende">Mubende</option>
+                    <option value="mukono">Mukono</option>
+                    <option value="nakapiripirit">Nakapiripirit</option>
+                    <option value="nakaseke">Nakaseke</option>
+                    <option value="nakasongola">Nakasongola</option>
+                    <option value="namayingo">Namayingo</option>
+                    <option value="namisindwa">Namisindwa</option>
+                    <option value="namutumba">Namutumba</option>
+                    <option value="napak">Napak</option>
+                    <option value="nebbi">Nebbi</option>
+                    <option value="ngora">Ngora</option>
+                    <option value="ntoroko">Ntoroko</option>
+                    <option value="ntungamo">Ntungamo</option>
+                    <option value="nwoya">Nwoya</option>
+                    <option value="obongi">Obongi</option>
+                    <option value="omoro">Omoro</option>
+                    <option value="otuke">Otuke</option>
+                    <option value="oyam">Oyam</option>
+                    <option value="pader">Pader</option>
+                    <option value="pallisa">Pallisa</option>
+                    <option value="rakai">Rakai</option>
+                    <option value="rubanda">Rubanda</option>
+                    <option value="rubirizi">Rubirizi</option>
+                    <option value="rukiga">Rukiga</option>
+                    <option value="rukungiri">Rukungiri</option>
+                    <option value="sembabule">Sembabule</option>
+                    <option value="serere">Serere</option>
+                    <option value="sheema">Sheema</option>
+                    <option value="sironko">Sironko</option>
+                    <option value="soroti">Soroti</option>
+                    <option value="tororo">Tororo</option>
+                    <option value="wakiso">Wakiso</option>
+                    <option value="yumbe">Yumbe</option>
+                    <option value="zombo">Zombo</option>
+                </select>
+                </div>
+
+                <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="example@domain.com" required>
+                </div>
+                    
+                <div class="form-group" style="display: flex; align-items: center;">
+                    <select id="country_code" name="country_code" style="width: 30%; margin-right: 10px;">
+                    <option value="">Select Country Code</option>
+                    <option value="+93">+93 Afghanistan</option>
+                    <option value="+355">+355 Albania</option>
+                    <option value="+213">+213 Algeria</option>
+                    <option value="+1-684">+1-684 American Samoa</option>
+                    <option value="+376">+376 Andorra</option>
+                    <option value="+244">+244 Angola</option>
+                    <option value="+1-264">+1-264 Anguilla</option>
+                    <option value="+672">+672 Antarctica</option>
+                    <option value="+1-268">+1-268 Antigua and Barbuda</option>
+                    <option value="+54">+54 Argentina</option>
+                    <option value="+374">+374 Armenia</option>
+                    <option value="+297">+297 Aruba</option>
+                    <option value="+61">+61 Australia</option>
+                    <option value="+43">+43 Austria</option>
+                    <option value="+994">+994 Azerbaijan</option>
+                    <option value="+1-242">+1-242 Bahamas</option>
+                    <option value="+973">+973 Bahrain</option>
+                    <option value="+880">+880 Bangladesh</option>
+                    <option value="+1-246">+1-246 Barbados</option>
+                    <option value="+375">+375 Belarus</option>
+                    <option value="+32">+32 Belgium</option>
+                    <option value="+501">+501 Belize</option>
+                    <option value="+229">+229 Benin</option>
+                    <option value="+1-441">+1-441 Bermuda</option>
+                    <option value="+975">+975 Bhutan</option>
+                    <option value="+591">+591 Bolivia</option>
+                    <option value="+387">+387 Bosnia and Herzegovina</option>
+                    <option value="+267">+267 Botswana</option>
+                    <option value="+55">+55 Brazil</option>
+                    <option value="+246">+246 British Indian Ocean Territory</option>
+                    <option value="+1-284">+1-284 British Virgin Islands</option>
+                    <option value="+673">+673 Brunei</option>
+                    <option value="+359">+359 Bulgaria</option>
+                    <option value="+226">+226 Burkina Faso</option>
+                    <option value="+257">+257 Burundi</option>
+                    <option value="+855">+855 Cambodia</option>
+                    <option value="+237">+237 Cameroon</option>
+                    <option value="+1">+1 Canada</option>
+                    <option value="+238">+238 Cape Verde</option>
+                    <option value="+1-345">+1-345 Cayman Islands</option>
+                    <option value="+236">+236 Central African Republic</option>
+                    <option value="+235">+235 Chad</option>
+                    <option value="+56">+56 Chile</option>
+                    <option value="+86">+86 China</option>
+                    <option value="+61">+61 Christmas Island</option>
+                    <option value="+61">+61 Cocos Islands</option>
+                    <option value="+57">+57 Colombia</option>
+                    <option value="+269">+269 Comoros</option>
+                    <option value="+682">+682 Cook Islands</option>
+                    <option value="+506">+506 Costa Rica</option>
+                    <option value="+385">+385 Croatia</option>
+                    <option value="+53">+53 Cuba</option>
+                    <option value="+599">+599 Curacao</option>
+                    <option value="+357">+357 Cyprus</option>
+                    <option value="+420">+420 Czech Republic</option>
+                    <option value="+243">+243 Democratic Republic of the Congo</option>
+                    <option value="+45">+45 Denmark</option>
+                    <option value="+253">+253 Djibouti</option>
+                    <option value="+1-767">+1-767 Dominica</option>
+                    <option value="+1-809">+1-809 Dominican Republic</option>
+                    <option value="+670">+670 East Timor</option>
+                    <option value="+593">+593 Ecuador</option>
+                    <option value="+20">+20 Egypt</option>
+                    <option value="+503">+503 El Salvador</option>
+                    <option value="+240">+240 Equatorial Guinea</option>
+                    <option value="+291">+291 Eritrea</option>
+                    <option value="+372">+372 Estonia</option>
+                    <option value="+251">+251 Ethiopia</option>
+                    <option value="+500">+500 Falkland Islands</option>
+                    <option value="+298">+298 Faroe Islands</option>
+                    <option value="+679">+679 Fiji</option>
+                    <option value="+358">+358 Finland</option>
+                    <option value="+33">+33 France</option>
+                    <option value="+689">+689 French Polynesia</option>
+                    <option value="+241">+241 Gabon</option>
+                    <option value="+220">+220 Gambia</option>
+                    <option value="+995">+995 Georgia</option>
+                    <option value="+49">+49 Germany</option>
+                    <option value="+233">+233 Ghana</option>
+                    <option value="+350">+350 Gibraltar</option>
+                    <option value="+30">+30 Greece</option>
+                    <option value="+299">+299 Greenland</option>
+                    <option value="+1-473">+1-473 Grenada</option>
+                    <option value="+1-671">+1-671 Guam</option>
+                    <option value="+502">+502 Guatemala</option>
+                    <option value="+44-1481">+44-1481 Guernsey</option>
+                    <option value="+224">+224 Guinea</option>
+                    <option value="+245">+245 Guinea-Bissau</option>
+                    <option value="+592">+592 Guyana</option>
+                    <option value="+509">+509 Haiti</option>
+                    <option value="+504">+504 Honduras</option>
+                    <option value="+852">+852 Hong Kong</option>
+                    <option value="+36">+36 Hungary</option>
+                    <option value="+354">+354 Iceland</option>
+                    <option value="+91">+91 India</option>
+                    <option value="+62">+62 Indonesia</option>
+                    <option value="+98">+98 Iran</option>
+                    <option value="+964">+964 Iraq</option>
+                    <option value="+353">+353 Ireland</option>
+                    <option value="+44-1624">+44-1624 Isle of Man</option>
+                    <option value="+972">+972 Israel</option>
+                    <option value="+39">+39 Italy</option>
+                    <option value="+225">+225 Ivory Coast</option>
+                    <option value="+1-876">+1-876 Jamaica</option>
+                    <option value="+81">+81 Japan</option>
+                    <option value="+44-1534">+44-1534 Jersey</option>
+                    <option value="+962">+962 Jordan</option>
+                    <option value="+7">+7 Kazakhstan</option>
+                    <option value="+254">+254 Kenya</option>
+                    <option value="+686">+686 Kiribati</option>
+                    <option value="+383">+383 Kosovo</option>
+                    <option value="+965">+965 Kuwait</option>
+                    <option value="+996">+996 Kyrgyzstan</option>
+                    <option value="+856">+856 Laos</option>
+                    <option value="+371">+371 Latvia</option>
+                    <option value="+961">+961 Lebanon</option>
+                    <option value="+266">+266 Lesotho</option>
+                    <option value="+231">+231 Liberia</option>
+                    <option value="+218">+218 Libya</option>
+                    <option value="+423">+423 Liechtenstein</option>
+                    <option value="+370">+370 Lithuania</option>
+                    <option value="+352">+352 Luxembourg</option>
+                    <option value="+853">+853 Macau</option>
+                    <option value="+389">+389 Macedonia</option>
+                    <option value="+261">+261 Madagascar</option>
+                    <option value="+265">+265 Malawi</option>
+                    <option value="+60">+60 Malaysia</option>
+                    <option value="+960">+960 Maldives</option>
+                    <option value="+223">+223 Mali</option>
+                    <option value="+356">+356 Malta</option>
+                    <option value="+692">+692 Marshall Islands</option>
+                    <option value="+222">+222 Mauritania</option>
+                    <option value="+230">+230 Mauritius</option>
+                    <option value="+262">+262 Mayotte</option>
+                    <option value="+52">+52 Mexico</option>
+                    <option value="+691">+691 Micronesia</option>
+                    <option value="+373">+373 Moldova</option>
+                    <option value="+377">+377 Monaco</option>
+                    <option value="+976">+976 Mongolia</option>
+                    <option value="+382">+382 Montenegro</option>
+                    <option value="+1-664">+1-664 Montserrat</option>
+                    <option value="+212">+212 Morocco</option>
+                    <option value="+258">+258 Mozambique</option>
+                    <option value="+95">+95 Myanmar</option>
+                    <option value="+264">+264 Namibia</option>
+                    <option value="+674">+674 Nauru</option>
+                    <option value="+977">+977 Nepal</option>
+                    <option value="+31">+31 Netherlands</option>
+                    <option value="+599">+599 Netherlands Antilles</option>
+                    <option value="+687">+687 New Caledonia</option>
+                    <option value="+64">+64 New Zealand</option>
+                    <option value="+505">+505 Nicaragua</option>
+                    <option value="+227">+227 Niger</option>
+                    <option value="+234">+234 Nigeria</option>
+                    <option value="+683">+683 Niue</option>
+                    <option value="+672">+672 Norfolk Island</option>
+                    <option value="+850">+850 North Korea</option>
+                    <option value="+1-670">+1-670 Northern Mariana Islands</option>
+                    <option value="+47">+47 Norway</option>
+                    <option value="+968">+968 Oman</option>
+                    <option value="+92">+92 Pakistan</option>
+                    <option value="+680">+680 Palau</option>
+                    <option value="+970">+970 Palestine</option>
+                    <option value="+507">+507 Panama</option>
+                    <option value="+675">+675 Papua New Guinea</option>
+                    <option value="+595">+595 Paraguay</option>
+                    <option value="+51">+51 Peru</option>
+                    <option value="+63">+63 Philippines</option>
+                    <option value="+64">+64 Pitcairn</option>
+                    <option value="+48">+48 Poland</option>
+                    <option value="+351">+351 Portugal</option>
+                    <option value="+1-787">+1-787 Puerto Rico</option>
+                    <option value="+974">+974 Qatar</option>
+                    <option value="+242">+242 Republic of the Congo</option>
+                    <option value="+262">+262 Reunion</option>
+                    <option value="+40">+40 Romania</option>
+                    <option value="+7">+7 Russia</option>
+                    <option value="+250">+250 Rwanda</option>
+                    <option value="+590">+590 Saint Barthelemy</option>
+                    <option value="+290">+290 Saint Helena</option>
+                    <option value="+1-869">+1-869 Saint Kitts and Nevis</option>
+                    <option value="+1-758">+1-758 Saint Lucia</option>
+                    <option value="+590">+590 Saint Martin</option>
+                    <option value="+508">+508 Saint Pierre and Miquelon</option>
+                    <option value="+1-784">+1-784 Saint Vincent and the Grenadines</option>
+                    <option value="+685">+685 Samoa</option>
+                    <option value="+378">+378 San Marino</option>
+                    <option value="+239">+239 Sao Tome and Principe</option>
+                    <option value="+966">+966 Saudi Arabia</option>
+                    <option value="+221">+221 Senegal</option>
+                    <option value="+381">+381 Serbia</option>
+                    <option value="+248">+248 Seychelles</option>
+                    <option value="+232">+232 Sierra Leone</option>
+                    <option value="+65">+65 Singapore</option>
+                    <option value="+1-721">+1-721 Sint Maarten</option>
+                    <option value="+421">+421 Slovakia</option>
+                    <option value="+386">+386 Slovenia</option>
+                    <option value="+677">+677 Solomon Islands</option>
+                    <option value="+252">+252 Somalia</option>
+                    <option value="+27">+27 South Africa</option>
+                    <option value="+82">+82 South Korea</option>
+                    <option value="+211">+211 South Sudan</option>
+                    <option value="+34">+34 Spain</option>
+                    <option value="+94">+94 Sri Lanka</option>
+                    <option value="+249">+249 Sudan</option>
+                    <option value="+597">+597 Suriname</option>
+                    <option value="+47">+47 Svalbard and Jan Mayen</option>
+                    <option value="+268">+268 Swaziland</option>
+                    <option value="+46">+46 Sweden</option>
+                    <option value="+41">+41 Switzerland</option>
+                    <option value="+963">+963 Syria</option>
+                    <option value="+886">+886 Taiwan</option>
+                    <option value="+992">+992 Tajikistan</option>
+                    <option value="+255">+255 Tanzania</option>
+                    <option value="+66">+66 Thailand</option>
+                    <option value="+228">+228 Togo</option>
+                    <option value="+690">+690 Tokelau</option>
+                    <option value="+676">+676 Tonga</option>
+                    <option value="+1-868">+1-868 Trinidad and Tobago</option>
+                    <option value="+216">+216 Tunisia</option>
+                    <option value="+90">+90 Turkey</option>
+                    <option value="+90">+90 Turkey</option>
+                    <option value="+993">+993 Turkmenistan</option>
+                    <option value="+1-649">+1-649 Turks and Caicos Islands</option>
+                    <option value="+688">+688 Tuvalu</option>
+                    <option value="+1-340">+1-340 U.S. Virgin Islands</option>
+                    <option value="+256">+256 Uganda</option>
+                    <option value="+380">+380 Ukraine</option>
+                    <option value="+971">+971 United Arab Emirates</option>
+                    <option value="+44">+44 United Kingdom</option>
+                    <option value="+1">+1 United States</option>
+                    <option value="+598">+598 Uruguay</option>
+                    <option value="+998">+998 Uzbekistan</option>
+                    <option value="+678">+678 Vanuatu</option>
+                    <option value="+379">+379 Vatican</option>
+                    <option value="+58">+58 Venezuela</option>
+                    <option value="+84">+84 Vietnam</option>
+                    <option value="+681">+681 Wallis and Futuna</option>
+                    <option value="+212">+212 Western Sahara</option>
+                    <option value="+967">+967 Yemen</option>
+                    <option value="+260">+260 Zambia</option>
+                    <option value="+263">+263 Zimbabwe</option>
+                </select>          
+                <input type="tel" id="phone_number" name="phone_number" placeholder="e.g., +256 772 123 456">
+      
+            </div>
+            <div class="form-group">
+                    <label for="occupation">Occupation:</label>
+                    <input type="text" id="occupation" name="occupation">
+            </div>
+            <div class="form-group">
+                <label for="marital_status">Marital Status:</label>
+                <select id="marital_status" name="marital_status">
+                    <option value="">Select Marital Status</option>
+                    <option value="single">Single</option>
+                    <option value="married">Married</option>
+                    <option value="divorced">Divorced</option>
+                    <option value="widowed">Widowed</option>
+                    <option value="separated">Separated</option>
+                    <option value="cohabiting">Cohabiting</option>
+                    <option value="domestic_partnership">Domestic Partnership</option>
+                    <option value="engaged">Engaged</option>
+                    <option value="other">Other (please specify)</option>
+                </select>
+                
+                <div id="marital_status_other" style="display:none;">
+                    <label for="marital_status_other_input">Please specify:</label>
+                    <textarea id="marital_status_other_input" name="marital_status_other_input"></textarea>
+                </div>
+            
+                <script>
+                    
+                    document.getElementById('marital_status').addEventListener('change', function() {
+                        var otherInput = document.getElementById('marital_status_other');
+                        if (this.value === 'other') {
+                            otherInput.style.display = 'block';
+                        } else {
+                            otherInput.style.display = 'none';
+                        }
+                    });
+                </script>
+            </div>
+            
+            <div class="form-group">
+                <label for="smoking_status">Smoking Status:</label>
+                <select id="smoking_status" name="smoking_status">
+                    <option value="">Select Smoking Status</option>
+                    <option value="non_smoker">Non-smoker</option>
+                    <option value="occasional_smoker">Occasional Smoker</option>
+                    <option value="regular_smoker">Regular Smoker</option>
+                    <option value="former_smoker">Former Smoker</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="alcohol_consumption">Alcohol Consumption:</label>
+                <select id="alcohol_consumption" name="alcohol_consumption">
+                    <option value="">Select Alcohol Consumption</option>
+                    <option value="none">None</option>
+                    <option value="social_drinker">Social Drinker</option>
+                    <option value="moderate_drinker">Moderate Drinker</option>
+                    <option value="heavy_drinker">Heavy Drinker</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="physical_activity">Physical Activity Level:</label>
+                <select id="physical_activity" name="physical_activity">
+                    <option value="">Select Physical Activity Level</option>
+                    <option value="sedentary">Sedentary</option>
+                    <option value="lightly_active">Lightly Active</option>
+                    <option value="moderately_active">Moderately Active</option>
+                    <option value="very_active">Very Active</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="family_medical_history">Family History of Major Diseases:</label>
+                <select id="family_medical_history" name="family_medical_history">
+                    <option value="">Select Family History</option>
+                    <option value="none">None</option>
+                    <option value="diabetes">Diabetes</option>
+                    <option value="heart_disease">Heart Disease</option>
+                    <option value="cancer">Cancer</option>
+                    <option value="hypertension">Hypertension</option>
+                    <option value="stroke">Stroke</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="family_medical_history_details">Details of Family Medical History:</label>
+                <textarea id="family_medical_history_details" name="family_medical_history_details" rows="3" placeholder="Provide additional details about family medical history."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="emergency_contact">Emergency Contact Name:</label>
+                <input type="text" id="emergency_contact" name="emergency_contact" placeholder="Enter full name of emergency contact" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="emergency_phone">Emergency Contact Phone:</label>
+                <input type="tel" id="emergency_phone" name="emergency_phone" placeholder="e.g., +256 772 123 456" pattern="\+?\d{1,4}?[-.\s]?(?:\(?\d{1,5}?\)?[-.\s]?)?\d{1,15}" required>
+            </div>
+            
+            
+            <div class="form-group">
+                <label for="emergency_contact_relationship">Relationship with Emergency Contact:</label>
+                <select id="emergency_contact_relationship" name="emergency_contact_relationship" required>
+                    <option value="">Select a relationship</option>
+                    <option value="parent">Parent</option>
+                    <option value="sibling">Sibling</option>
+                    <option value="spouse">Spouse</option>
+                    <option value="friend">Friend</option>
+                    <option value="colleague">Colleague</option>
+                    <option value="guardian">Guardian</option>
+                    <option value="other">Other (please specify)</option>
+                </select>
+            
+                <div id="other_relationship" style="display:none;">
+                    <label for="other_relationship_input">Please specify:</label>
+                    <textarea id="other_relationship_input" name="other_relationship_input" rows="3" placeholder="Enter relationship details"></textarea>
+                </div>
+            </div>
+            
+            <script>
+            document.getElementById('emergency_contact_relationship').addEventListener('change', function() {
+                var otherInput = document.getElementById('other_relationship');
+                if (this.value === 'other') {
+                    otherInput.style.display = 'block';
+                } else {
+                    otherInput.style.display = 'none';
+                }
+            });
+            </script>
+            
+            <div class="form-group">
+                <label for="language_preference">Language Preference:</label>
+                <select id="language_preference" name="language_preference" required>
+                    <option value="">Select a language</option>
+                    <option value="english">English</option>
+                    <option value="luganda">Luganda</option>
+                    <option value="swahili">Swahili</option>
+                    <option value="runyankore">Runyankore</option>
+                    <option value="rutooro">Rutooro</option>
+                    <option value="rwamagambo">Rwamagambo</option>
+                    <option value="acholi">Acholi</option>
+                    <option value="lango">Lango</option>
+                    <option value="ateso">Ateso</option>
+                    <option value="lugisu">Lugisu</option>
+                    <option value="other">Other (please specify)</option>
+                </select>
+            
+                <div id="other_language" style="display:none;">
+                    <label for="other_language_input">Please specify:</label>
+                    <input type="text" id="other_language_input" name="other_language_input" placeholder="Enter language">
+                </div>
+            </div>
+            
+            <script>
+            document.getElementById('language_preference').addEventListener('change', function() {
+                var otherLanguageInput = document.getElementById('other_language');
+                if (this.value === 'other') {
+                    otherLanguageInput.style.display = 'block';
+                } else {
+                    otherLanguageInput.style.display = 'none';
+                }
+            });
+            </script>
+            
+                <div class="form-group">
+                    <label for="insurance_coverage">Insurance Coverage Type:</label>
+                    <select id="insurance_coverage" name="insurance_coverage">
+                        <option value="">Select Insurance Coverage</option>
+                        <option value="private">Private Insurance</option>
+                        <option value="government">Government Insurance</option>
+                        <option value="none">No Insurance</option>
+                        <option value="NHIS">National Health Insurance Scheme (NHIS)</option>
+                        <option value="UPDF">Uganda Peoples' Defence Forces (UPDF) Medical Insurance</option>
+                        <option value="UMMA">Uganda Medical Mission Association (UMMA) Insurance</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+            <div class="form-group">
+                <label for="insurance_provider">Insurance Provider:</label>
+                <input type="text" id="insurance_provider" name="insurance_provider" placeholder="e.g., Aetna, MMI, NHIF" required>
+            </div>
+                
+            <div class="form-group">
+                <label for="insurance_policy_number">Insurance Policy Number:</label>
+                <input type="text" id="insurance_policy_number" name="insurance_policy_number">
+            </div>
+            <div class="form-group">
+                <label for="medical_history">Medical History:</label>
+                <select id="medical_history" name="medical_history" onchange="toggleOtherInput(this);">
+                    <option value="">Select an option</option>
+                    <option value="none">No Medical History</option>
+                    <option value="diabetes">Diabetes</option>
+                    <option value="hypertension">Hypertension</option>
+                    <option value="asthma">Asthma</option>
+                    <option value="heart_disease">Heart Disease</option>
+                    <option value="allergies">Allergies</option>
+                    <option value="arthritis">Arthritis</option>
+                    <option value="chronic_kidney_disease">Chronic Kidney Disease</option>
+                    <option value="stroke">Stroke</option>
+                    <option value="cancer">Cancer</option>
+                    <option value="epilepsy">Epilepsy</option>
+                    <option value="hiv_aids">HIV/AIDS</option>
+                    <option value="tuberculosis">Tuberculosis</option>
+                    <option value="mental_health">Mental Health Disorders</option>
+                    <option value="autoimmune_disease">Autoimmune Disease</option>
+                    <option value="hepatitis">Hepatitis</option>
+                    <option value="chronic_lung_disease">Chronic Lung Disease</option>
+                    <option value="gastrointestinal_disorders">Gastrointestinal Disorders</option>
+                    <option value="blood_disorders">Blood Disorders</option>
+                    <option value="skin_conditions">Skin Conditions</option>
+                    <option value="neurological_disorders">Neurological Disorders</option>
+                    <option value="genetic_disorders">Genetic Disorders</option>
+                    <option value="thyroid_disorders">Thyroid Disorders</option>
+                    <option value="vision_problems">Vision Problems</option>
+                    <option value="hearing_loss">Hearing Loss</option>
+                    <option value="other">Other (please specify)</option>
+                </select>
+            
+                <div id="other_medical_history" style="display:none;">
+                    <label for="other_medical_history_input">Please specify:</label>
+                    <textarea id="other_medical_history_input" name="other_medical_history_input"></textarea>
+                </div>
+            </div>
+            
+            <script>
+            function toggleOtherInput(select) {
+                var otherInput = document.getElementById("other_medical_history");
+                otherInput.style.display = (select.value === "other") ? "block" : "none";
+            }
+            </script>
+            
+                <br>
+                <div class="form-group">
+                    <label for="primary_care_physician">Primary Care Physician:</label>
+                    <input type="text" id="primary_care_physician" name="primary_care_physician" placeholder="Enter the name of your primary care physician">
+                </div>
+                
+
+            <div class="form-group">
+                    <label for="current_medications">Current Medications:</label>
+                    <select id="current_medications" name="current_medications" onchange="toggleMedicationDetails(this);">
+                        <option value="">Select a drug class</option>
+                        <option value="antibiotics">Antibiotics (e.g., Amoxicillin)</option>
+                        <option value="pain_relievers">Pain Relievers (e.g., Ibuprofen)</option>
+                        <option value="antidepressants">Antidepressants (e.g., Sertraline)</option>
+                        <option value="antihypertensives">Antihypertensives (e.g., Amlodipine)</option>
+                        <option value="antidiabetics">Antidiabetics (e.g., Metformin)</option>
+                        <option value="anticoagulants">Anticoagulants (e.g., Warfarin)</option>
+                        <option value="antihistamines">Antihistamines (e.g., Loratadine)</option>
+                        <option value="bronchodilators">Bronchodilators (e.g., Albuterol)</option>
+                        <option value="cholesterol_lowering">Cholesterol-Lowering Drugs (e.g., Atorvastatin)</option>
+                        <option value="hormones">Hormonal Medications (e.g., Insulin)</option>
+                        <option value="anticonvulsants">Anticonvulsants (e.g., Valproic Acid)</option>
+                        <option value="immunosuppressants">Immunosuppressants (e.g., Methotrexate)</option>
+                        <option value="other">Other (please specify)</option>
+                    </select>
+                
+                    <div id="medication_details" style="display:none;">
+                        <label for="medication_details_input">Please provide more details:</label>
+                        <textarea id="medication_details_input" name="medication_details_input" rows="4" placeholder="Describe the medication, how long you've been taking it, and any other relevant information."></textarea>
+                
+                        <label for="medication_duration">Duration (in months or years):</label>
+                        <input type="text" id="medication_duration" name="medication_duration" placeholder="e.g., 6 months, 2 years">
+                    </div>
+                </div>
+                
+                <script>
+                function toggleMedicationDetails(select) {
+                    var detailsInput = document.getElementById("medication_details");
+                    if (select.value === "other") {
+                        detailsInput.style.display = "block";
+                    } else {
+                        detailsInput.style.display = "none";
+                    }
+                }
+                </script>
+                <div class="form-group">
+                        <label for="surgical_history">History of Surgeries:</label>
+                        <select id="surgical_history" name="surgical_history" onchange="toggleSurgeryDetails(this);">
+                            <option value="">Select an option</option>
+                            <option value="none">None</option>
+                            <option value="appendectomy">Appendectomy (Appendix Removal)</option>
+                            <option value="cholecystectomy">Cholecystectomy (Gallbladder Removal)</option>
+                            <option value="hernia_repair">Hernia Repair</option>
+                            <option value="cesarean_section">Cesarean Section (C-Section)</option>
+                            <option value="bypass_surgery">Bypass Surgery (e.g., Heart Bypass)</option>
+                            <option value="knee_replacement">Knee Replacement</option>
+                            <option value="hip_replacement">Hip Replacement</option>
+                            <option value="hysterectomy">Hysterectomy (Uterus Removal)</option>
+                            <option value="tonsillectomy">Tonsillectomy (Tonsil Removal)</option>
+                            <option value="thyroidectomy">Thyroidectomy (Thyroid Removal)</option>
+                            <option value="spinal_surgery">Spinal Surgery</option>
+                            <option value="mastectomy">Mastectomy (Breast Removal)</option>
+                            <option value="prostatectomy">Prostatectomy (Prostate Removal)</option>
+                            <option value="bariatric_surgery">Bariatric Surgery (Weight Loss Surgery)</option>
+                            <option value="other">Other (please specify)</option>
+                        </select>
+                    
+                        <div id="surgery_details" style="display:none;">
+                            <label for="surgery_details_input">Please specify:</label>
+                            <textarea id="surgery_details_input" name="surgery_details_input" rows="4" placeholder="Describe the surgery, date, and any relevant details."></textarea>
+                        </div>
+                    </div>
+                    
+                    <script>
+                    function toggleSurgeryDetails(select) {
+                        var detailsInput = document.getElementById("surgery_details");
+                        if (select.value === "other") {
+                            detailsInput.style.display = "block";
+                        } else {
+                            detailsInput.style.display = "none";
+                        }
+                    }
+                    </script>
+                    
+                
+                <div class="form-group">
+                        <label for="allergies">Allergies:</label>
+                        <select id="allergies" name="allergies" onchange="toggleAllergyDetails(this);">
+                            <option value="">Select an option</option>
+                            <option value="none">None</option>
+                            <option value="peanuts">Peanuts</option>
+                            <option value="shellfish">Shellfish</option>
+                            <option value="penicillin">Penicillin</option>
+                            <option value="latex">Latex</option>
+                            <option value="pollen">Pollen</option>
+                            <option value="dairy">Dairy</option>
+                            <option value="gluten">Gluten</option>
+                            <option value="sulfites">Sulfites</option>
+                            <option value="eggs">Eggs</option>
+                            <option value="soy">Soy</option>
+                            <option value="wheat">Wheat</option>
+                            <option value="fish">Fish</option>
+                            <option value="tree_nuts">Tree Nuts</option>
+                            <option value="mold">Mold</option>
+                            <option value="insect_stings">Insect Stings</option>
+                            <option value="other">Other (please specify)</option>
+                        </select>
+                    
+                        <div id="allergy_details" style="display:none;">
+                            <label for="allergy_details_input">Please specify:</label>
+                            <textarea id="allergy_details_input" name="allergy_details_input" rows="4" placeholder="Describe the allergy and any relevant details."></textarea>
+                        </div>
+                    </div>
+                    
+                    <script>
+                    function toggleAllergyDetails(select) {
+                        var detailsInput = document.getElementById("allergy_details");
+                        if (select.value === "other") {
+                            detailsInput.style.display = "block";
+                        } else {
+                            detailsInput.style.display = "none";
+                        }
+                    }
+                    </script>
+                <div class="form-group">
+                        <label for="consent_share_info">Consent to Share Information:</label>
+                        <input type="checkbox" id="consent_share_info" name="consent_share_info">
+                        <label for="consent_share_info">I consent to share my information with healthcare providers and for research purposes.</label>
+                </div>
+                <script>
+                function updatePatientProgress() {
+                    const form = document.getElementById('patientForm');
+                    const progressBar = document.getElementById('patientProgressBar');
+                    const formData = new FormData(form);
+                    const totalFields = form.querySelectorAll('input, select').length;
+                    let filledFields = 0;
+                
+                    form.querySelectorAll('input, select').forEach(field => {
+                        if (field.value) filledFields++;
+                    });
+                
+                    const progress = (filledFields / totalFields) * 100;
+                    progressBar.style.width = progress + '%';
+                    progressBar.innerText = Math.round(progress) + '%';
+                }</script>                    
+
+            <input type="submit" value="Register">
+
+        </form>
+        <footer>
+
+            
+            <div class="footer-links">
+                <p>&copy; 2024 MedHub. All rights reserved.</p>
+                <a href="{{ url_for('bp.index') }}">Back Home</a>
+                <a href="{{ url_for('bp.privacy_policy') }}">Privacy Policy</a>
+                <a href="{{ url_for('bp.terms_of_service') }}">Terms of Service</a>
+                <a href="{{ url_for('bp.support') }}">Get Support</a>
+                <a href="{{ url_for('bp.view_medical_history') }}">View Medical History</a>
+                <a href="{{ url_for('bp.forum') }}">Forums</a>
+                <a href="{{ url_for('bp.contact_us') }}">Contact Us</a>
+            </div>
+        </footer>
+        
+    </div>
+</body>
+</html>
+
+
