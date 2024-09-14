@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultation Page</title>
+   <style>
+    :root {
+    --light-yellow: #ffeaac;
+    --coral: #ff867c;
+    --light-teal: #95ccc5;
+    --dark-teal: #2e5668;
+    --light-greenish: #C4DAD2;
+    --container-bg: #E9EFEC;
+    --ios-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --shadow: rgba(0, 0, 0, 0.1);
+    --transition: 0.3s ease;
+}
+
+body {
+    font-family: var(--ios-font);
+    margin: 0;
+    padding: 0;
+    background-color: var(--light-yellow);
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    width: 220px;
+    background-color: var(--dark-teal);
+    color: #fff;
+    padding: 20px;
+    box-shadow: 2px 0 10px var(--shadow);
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    border-radius: 0 30px 30px 0;
+    overflow-y: auto;
+}
+
+.sidebar h2 {
+    font-size: 22px;
+    font-weight: 500;
+    color: #fff;
+    margin: 0;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: #fff;
+    display: block;
+    padding: 12px 20px;
+    font-size: 18px;
+    border-radius: 12px;
+    transition: background-color var(--transition), padding-left var(--transition);
+    margin-bottom: 15px;
+}
+
+.sidebar a.active,
+.sidebar a:hover {
+    background-color: var(--coral);
+    padding-left: 24px;
+}
+
+main {
+    margin-left: 240px;
+    padding: 30px;
+    background-color: var(--light-greenish);
+    border-radius: 30px 0 0 0;
+    flex: 1;
+    overflow-y: auto;
+}
+
+h2 {
+    color: var(--dark-teal);
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.section {
+    background-color: var(--container-bg);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px var(--shadow);
+    margin-bottom: 20px;
+}
+
+.button {
+    background-color: var(--dark-teal);
+    color: var(--light-yellow);
+    border: none;
+    border-radius: 12px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color var(--transition), transform 0.2s ease;
+    box-shadow: 0 4px 8px var(--shadow);
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.button:hover {
+    background-color: var(--coral);
+    transform: translateY(-2px);
+}
+
+.button-success {
+    background-color: #4CAF50; /* Green color for success */
+}
+
+.button-success:hover {
+    background-color: #45a049;
+}
+
+input[type="text"],
+input[type="file"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+li:last-child {
+    border-bottom: none;
+}
+
+footer {
+    background-color: var(--dark-teal);
+    color: #fff;
+    text-align: center;
+    padding: 10px 20px; /* Reduced padding for a slimmer footer */
+    position: fixed;
+    bottom: 0;
+    width: calc(100% - 220px);
+    margin-left: 220px;
+    font-size: 14px; /* Slightly smaller font size for a more compact footer */
+    display: flex;
+    justify-content: center; /* Center contents horizontally */
+    align-items: center; /* Center contents vertically */
+    gap: 20px; /* Space between footer items */
+}
+
+footer .footer-links {
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap to the next line if needed */
+    gap: 15px; /* Space between links */
+    list-style: none; /* Remove default list styling */
+    margin: 0;
+    padding: 0;
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
+footer a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0;
+    padding: 0 5px; /* Small horizontal padding for better clickability */
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: var(--coral);
+}
+
+
+   </style>
+</head>
+<body>
+    <div class="sidebar">
+        <a href="{{ url_for('bp.index') }}"><h2>MedHub</h2></a>
+        <a href="{{ url_for('bp.manage_appointments') }}">Manage Appointments</a>
+        <a href="{{ url_for('bp.book_appointment') }}">Book Appointment</a>
+        <a href="{{ url_for('bp.rebook_appointment') }}">ReBook Appointment</a>
+        <a href="{{ url_for('bp.cancel_appointment') }}">Cancel Appointment</a>
+        <a href="{{ url_for('bp.view_doctor_availability') }}">View Doctor Availability</a>
+        <a href="{{ url_for('bp.edit_availability') }}" class="active">Edit Availability</a>
+        <a href="{{ url_for('bp.consultations') }}">Start Consultation</a>
+        <a href="{{ url_for('bp.view_medical_history') }}">View Medical History</a>
+    </div>
+
+    <main>
+        <!-- Appointment ID Input -->
+        <h2>Consultations</h2>
+        <div class="section">
+            <form action="{{ url_for('bp.consultations') }}" method="POST" onsubmit="return validateAppointmentId()">
+                <label for="appointment_id">Enter Appointment ID:</label>
+                <input type="text" id="appointment_id" name="appointment_id" required>
+                <button type="button" class="button" onclick="showAppointmentDetails()">Proceed</button>
+            </form>
+        </div>
+
+        <!-- Appointment Details -->
+        <div id="appointment-details" class="section" style="display:none;">
+            <h3>Appointment Details:</h3>
+            <p><strong>Doctor:</strong> Dr. John Doe</p>
+            <p><strong>Date:</strong> 2024-09-08</p>
+            <p><strong>Time:</strong> 10:00 AM</p>
+            <button type="button" class="button" onclick="startChat()">Start Chat</button>
+            <button type="button" class="button" onclick="startVideoCall()">Start Video Call</button>
+        </div>
+
+        <!-- Countdown Timer -->
+        <div id="countdown" class="section"></div>
+
+        <!-- OTP Verification -->
+        <div id="otp-section" class="section" style="display:none;">
+            <label for="otp">Enter OTP:</label>
+            <input type="text" id="otp" name="otp" required>
+            <button type="button" class="button" onclick="verifyOTP()">Verify OTP</button>
+        </div>
+
+        <!-- Consultation History -->
+        <div id="consultation-history" class="section">
+            <h3>Previous Consultations</h3>
+            <ul>
+                <li>Consultation with Dr. Jane Doe on 2024-08-15 (Chat)</li>
+                <li>Consultation with Dr. John Doe on 2024-07-20 (Video Call)</li>
+            </ul>
+        </div>
+
+        <!-- Upload Medical Documents -->
+        <div id="upload-documents" class="section">
+            <h3>Upload Medical Documents</h3>
+            <input type="file" id="medical-documents" multiple>
+            <button type="button" class="button" onclick="uploadDocuments()">Upload</button>
+        </div>
+
+        <!-- Consultation Notes -->
+        <div id="consultation-notes" class="section">
+            <h3>Consultation Notes</h3>
+            <textarea id="notes" rows="5" placeholder="Write your notes here..."></textarea>
+            <button type="button" class="button" onclick="saveNotes()">Save Notes</button>
+        </div>
+
+        <!-- Symptom Checker -->
+        <div id="symptom-checker" class="section">
+            <h3>Symptom Checker</h3>
+            <button class="button" onclick="window.location.href = '{{ url_for('bp.symptom_checker') }}'">Check Symptoms</button>
+        </div>
+
+        <!-- Rate Consultation -->
+        <div id="rate-consultation" class="section">
+            <h3>Rate Your Consultation</h3>
+            <span>Rating: </span>
+            <select id="rating">
+                <option value="1">1 Star</option>
+                <option value="2">2 Stars</option>
+                <option value="3">3 Stars</option>
+                <option value="4">4 Stars</option>
+                <option value="5">5 Stars</option>
+            </select>
+            <button type="button" class="button button-success" onclick="submitRating()">Submit Rating</button>
+            <p id="reward-message" class="reward" style="display:none;">Thank you for your feedback! You've earned 50 reward points.</p>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <p>&copy; 2024 MedHub. All rights reserved.</p>
+            <a href="{{ url_for('bp.index') }}">Back Home</a>
+            <a href="{{ url_for('bp.privacy_policy') }}">Privacy Policy</a>
+            <a href="{{ url_for('bp.terms_of_service') }}">Terms of Service</a>
+            <a href="{{ url_for('bp.support') }}">Get Support</a>
+            <a href="{{ url_for('bp.view_medical_history') }}">View Medical History</a>
+            <a href="{{ url_for('bp.forum') }}">Forums</a>
+            <a href="{{ url_for('bp.contact_us') }}">Contact Us</a>
+        </div>
+    </footer>
+</body>
+</html>

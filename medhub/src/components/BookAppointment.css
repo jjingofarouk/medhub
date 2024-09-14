@@ -1,0 +1,210 @@
+/* Container and General Styling */
+.container {
+  max-width: 100%;
+  width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  padding: 0px; /* Adjust for expanded sidebar width */
+  background: linear-gradient(135deg, #d4d4ce, #c4dad2); /* Gradient background */
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  transition: padding-left 0.3s ease; /* Smooth transition for padding change */
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-left: 0; /* Reset padding for mobile view */
+  }
+}
+
+/* Progress Bar */
+.progress-bar-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+  padding: 0 20px;
+}
+
+.progress-step {
+  width: 50px;
+  height: 50px;
+  background-color: #287094;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 50px;
+  color: #f6f6f6;
+  font-weight: bold;
+  transition: transform 0.3s ease;
+}
+
+.progress-step.active {
+  background-color: #D8A25E; /* Accent color */
+  color: #fff;
+  transform: scale(1.2);
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.tab-button {
+  background: #287094;
+  color: #f6f6f6;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 16px;
+}
+
+.tab-button:hover {
+  background-color: #D8A25E; /* Accent color on hover */
+  color: #fff;
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.tab-button.active {
+  background-color: #D8A25E; /* Active button with accent color */
+  color: #fff;
+}
+
+/* Tab Content */
+.tab-content {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #f6f6f6;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Achievement Popup */
+.achievement-popup {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  background-color: #287094;
+  color: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: popup 0.5s ease-out;
+}
+
+.achievement-popup img {
+  width: 50px;
+  margin-top: 10px;
+}
+
+@keyframes popup {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Avatar Section */
+.avatar-section {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.avatar-container img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  margin: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.avatar-container img:hover {
+  transform: scale(1.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 3px solid #D8A25E; /* Accent color for avatar hover */
+}
+
+/* Note */
+.note {
+  margin-top: 30px;
+  font-style: italic;
+  color: #287094;
+}
+
+/* Back Button */
+.btn-secondary {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #023246;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  align-items: center;
+}
+
+.btn-secondary:hover {
+  background-color: #D8A25E; /* Accent color for button hover */
+  color: white;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1024px) {
+  .container {
+    padding: 20px;
+  }
+
+  .tabs {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tab-button {
+    width: 100%;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+
+  .progress-bar-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .progress-step {
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  .avatar-container img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .achievement-popup {
+    bottom: 5px;
+    right: 5px;
+    padding: 10px;
+    border-radius: 8px;
+  }
+
+  .note {
+    font-size: 14px;
+  }
+
+  .btn-secondary {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}

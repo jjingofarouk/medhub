@@ -1,0 +1,175 @@
+/* Dashboard.css */
+
+/* Overall dashboard styling */
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f6f6f6;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Navigation bar styling */
+.dashboard-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+/* Tile container for dashboard tiles */
+.tile-container {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.tile {
+  flex: 1;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+}
+
+.tile h2 {
+  font-size: 1.5rem;
+  color: #287094;
+  margin-bottom: 10px;
+}
+
+.tile p {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #D8A25E;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.button:hover {
+  background-color: #c28e5c;
+}
+
+/* Main dashboard items styling */
+.dashboard-items {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.dashboard-item {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.dashboard-item h2 {
+  font-size: 1.5rem;
+  color: #287094;
+  margin-bottom: 10px;
+}
+
+.dashboard-item p {
+  font-size: 1rem;
+  color: #666;
+}
+
+/* Calendar card styling */
+.calendar-card {
+  min-height: 400px; /* Ensure calendar has enough space */
+}
+
+/* Progress bar styling */
+.progress-container {
+  text-align: center;
+}
+
+.progress-bar {
+  background: #d4d4ce;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 30px;
+  margin-bottom: 10px;
+}
+
+.progress-fill {
+  background: #287094;
+  height: 100%;
+  width: 0%; /* Default width; will be updated dynamically */
+  transition: width 0.5s ease-in-out;
+}
+
+/* Activity feed styling */
+.activity-feed ul {
+  list-style: none;
+  padding: 0;
+}
+
+.activity-feed li {
+  background: #ffffff;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Notifications and upcoming appointments styling */
+.notifications, .upcoming-appointments {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.notifications ul, .upcoming-appointments ul {
+  list-style: none;
+  padding: 0;
+}
+
+.notifications li, .upcoming-appointments li {
+  background: #ffffff;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Health stats styling */
+.health-stats .stats-item {
+  margin-bottom: 20px;
+}
+
+.stats-item h3 {
+  font-size: 1.2rem;
+  color: #287094;
+}
+
+.stats-item p {
+  font-size: 1rem;
+  color: #666;
+}
+
+/* User profile summary styling */
+.profile-summary {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.profile-summary p {
+  font-size: 1rem;
+  color: #666;
+}
+
+.profile-summary strong {
+  color: #287094;
+}

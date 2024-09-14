@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Appointments</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    <style>
+        footer {
+    background-color: #2e5668; /* Dark Teal */
+    color: #ffffff;
+    text-align: center;
+    padding: 20px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
+footer a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 14px;
+}
+
+footer a:hover {
+    text-decoration: underline;
+    color: #ff867c; /* Coral */
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <a href="{{ url_for('bp.index') }}"><h2>MedHub</h2></a>
+        <a href="{{ url_for('bp.manage_appointments') }}">Manage Appointments</a>
+        <a href="{{ url_for('bp.book_appointment') }}">Book Appointment</a>
+        <a href="{{ url_for('bp.rebook_appointment') }}">ReBook Appointment</a>
+        <a href="{{ url_for('bp.cancel_appointment') }}">Cancel Appointment</a>
+        <a href="{{ url_for('bp.view_doctor_availability') }}">View Doctor Availability</a>
+        <a href="{{ url_for('bp.edit_availability') }}" class="active">Edit Availability</a>
+        <a href="{{ url_for('bp.consultations') }}">Start Consultation</a>
+        <a href="{{ url_for('bp.view_medical_history') }}">View Medical History</a>
+    </div>
+    
+    
+    <div class="container">
+        <h1>Manage Appointments</h1>
+        
+        <!-- Book Appointment Form -->
+        <form method="POST" action="{{ url_for('bp.book_appointment') }}" id="appointment-form">
+            <h2>Book Appointment</h2>
+            <div class="form-group">
+                <label for="patient_id">Patient ID:</label>
+                <input type="text" id="patient_id" name="patient_id" required>
+            </div>
+            <div class="form-group">
+                <label for="doctor_id">Doctor ID:</label>
+                <input type="text" id="doctor_id" name="doctor_id" required>
+            </div>
+            <div class="form-group">
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            <div class="form-group">
+                <label for="time">Time:</label>
+                <input type="time" id="time" name="time" required>
+            </div>
+            <div class="form-group">
+                <label for="reason">Reason for Visit:</label>
+                <select id="reason" name="reason" required>
+                    <option value="Consultation">Consultation</option>
+                    <option value="Follow-up">Follow-up</option>
+                    <option value="Routine Check-up">Routine Check-up</option>
+                    <option value="Urgent Care">Urgent Care</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="appointment_type">Appointment Type:</label>
+                <select id="appointment_type" name="appointment_type" required>
+                    <option value="In-Person">In-Person</option>
+                    <option value="Telehealth">Telehealth</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="communication_method">Preferred Communication Method:</label>
+                <select id="communication_method" name="communication_method" required>
+                    <option value="Phone">Phone</option>
+                    <option value="Email">Email</option>
+                    <option value="SMS">SMS</option>
+                    <option value="App Notification">App Notification</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="status">Status:</label>
+                <select id="status" name="status" required>
+                    <option value="pending">Pending</option>
+                    <option value="confirmed">Confirmed</option>
+                    <option value="cancelled">Cancelled</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="notes">Additional Notes:</label>
+                <textarea id="notes" name="notes" rows="3" placeholder="Any additional information or special instructions..."></textarea>
+            </div>
+            <input type="submit" value="Book Appointment">
+        </form>
+        
+        
+        
+        <a href="{{ url_for('bp.index') }}">Back to Home</a>
+        <div class="note">Please ensure all details are correct before submitting.</div>
+    </div>
+    <footer>
+        <div class="footer-links">
+            <p>&copy; 2024 MedHub. All rights reserved.</p>
+            <a href="{{ url_for('bp.index') }}">Back Home</a>
+            <a href="{{ url_for('bp.privacy_policy') }}">Privacy Policy</a>
+            <a href="{{ url_for('bp.terms_of_service') }}">Terms of Service</a>
+            <a href="{{ url_for('bp.support') }}">Get Support</a>
+            <a href="{{ url_for('bp.view_medical_history') }}">View Medical History</a>
+            <a href="{{ url_for('bp.forum') }}">Forums</a>
+            <a href="{{ url_for('bp.contact_us') }}">Contact Us</a>
+        </div>
+    </footer>
+    
+    
+
+    <!-- Optional JavaScript for form validation and dynamic updates -->
+    <script>
+        // Example of client-side validation and dynamic updates
+        $(document).ready(function() {
+            $('#date').change(function() {
+                // Implement logic to dynamically update available time slots
+            });
+
+            $('#appointment-form').submit(function(e) {
+                // Implement additional validation if needed
+            });
+
+            // Add similar JavaScript for other forms
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+.view-doctor-availability {
+    display: flex;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #2e5668; /* Dark Teal */
+    color: #fff;
+    position: fixed;
+    height: 100%;
+    padding: 15px;
+}
+
+.sidebar a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.sidebar a.active, .sidebar a:hover {
+    background-color: #ff867c; /* Coral */
+}
+
+.container {
+    margin-left: 270px;
+    padding: 20px;
+    width: calc(100% - 270px);
+}
+
+h1 {
+    color: #2e5668; /* Dark Teal */
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.btn {
+    padding: 10px 20px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-info {
+    background-color: #ff867c; /* Coral */
+}
+
+.btn-secondary {
+    background-color: #2e5668; /* Dark Teal */
+    border: none;
+}
+
+footer {
+    background-color: #2e5668; /* Dark Teal */
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: calc(100% - 250px);
+    margin-left: 250px;
+}
+
+.card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #fff;
+}
+
+.card-header {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #2e5668; /* Dark Teal */
+}
+
+.card-body {
+    font-size: 1rem;
+}
+
+.doctor-item {
+    margin-bottom: 10px;
+}
+
+.doctor-item:hover {
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    padding: 10px;
+}
