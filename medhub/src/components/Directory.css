@@ -1,0 +1,184 @@
+:root {
+    --primary-color: #27c7b8; /* Teal */
+    --secondary-color: #f78837; /* Orange */
+    --accent-color: #002432; /* Dark Navy */
+    --background-color: #dfe4e5; /* Light Gray */
+    --text-color: #002432; /* Dark Navy */
+    --card-background: #ffffff; /* White for Cards */
+    --shadow-color: rgba(0, 0, 0, 0.1); /* Light Shadow */
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+.directory {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0;
+    padding: 2rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+}
+
+h1::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    margin: 1rem auto;
+    border-radius: 2px;
+}
+
+section {
+    background-color: var(--card-background);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 10px var(--shadow-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px var(--shadow-color);
+}
+
+h2 {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--secondary-color);
+    padding-bottom: 0.5rem;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: var(--card-background);
+    border-left: 5px solid var(--primary-color);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+li:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 10px var(--shadow-color);
+}
+
+button {
+    background-color: var(--primary-color);
+    border: none;
+    color: #ffffff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+button:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+section:nth-child(1) li {
+    /* General Styles for Section 1 */
+}
+
+section:nth-child(2) li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+section:nth-child(3) li {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+}
+
+section:nth-child(4) li {
+    background-color: var(--secondary-color);
+    color: #ffffff;
+}
+
+section:nth-child(5) li {
+    background-color: var(--accent-color);
+    color: #ffffff;
+}
+
+section:nth-child(6) li {
+    background-color: var(--primary-color);
+    color: var(--accent-color);
+}
+
+section:nth-child(7) li {
+    background-color: var(--background-color);
+    color: var(--accent-color);
+}
+
+section:nth-child(8) {
+    background-color: var(--secondary-color);
+    color: #ffffff;
+}
+
+section:nth-child(8) button {
+    background-color: #ffffff;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+section:nth-child(8) button:hover {
+    background-color: var(--primary-color);
+    color: #ffffff;
+}
+
+@media (max-width: 768px) {
+    .directory {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.4rem;
+    }
+
+    section {
+        padding: 1rem;
+    }
+
+    li {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    button {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        margin-top: 0.5rem;
+    }
+}

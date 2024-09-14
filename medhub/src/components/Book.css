@@ -1,0 +1,85 @@
+/* Container */
+.book-appointment-container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #D4D4CE; /* Soft beige color */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Form Title */
+  .book-appointment-container h2 {
+    font-size: 2rem;
+    color: #023246; /* Dark teal */
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Form */
+  .appointment-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Form Group */
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  /* Form Labels */
+  .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1rem;
+    color: #023246; /* Dark teal */
+  }
+  
+  /* Form Inputs */
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    box-sizing: border-box;
+  }
+  
+  /* Form Inputs Focus */
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: #D8A25E; /* Yellow color */
+    outline: none;
+  }
+  
+  /* Button Styling */
+  .btn-primary {
+    background-color: #287094; /* Yellow color */
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .btn-primary:hover {
+    background-color: #D8A25E; /* Slightly darker yellow */
+  }
+  
+  
+  /* Textarea */
+  .form-group textarea {
+    resize: vertical;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .book-appointment-container {
+      padding: 15px;
+    }
+  }
+  

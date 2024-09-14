@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedHub Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/fullcalendar@6.0.1/main.css' rel='stylesheet' />
+    <script src='https://unpkg.com/fullcalendar@6.0.1/main.js'></script>
+
+  
+    
+</head>
+
+
+<body>
+
+    <button class="sidebar-toggle" id="sidebarToggle">&#9776;</button>
+
+    <div class="sidebar">
+        <a href="{{ url_for('bp.index') }}"><h2>MedHub</h2></a>
+        <a href="{{ url_for('bp.manage_appointments') }}">Manage Appointments</a>
+        <a href="{{ url_for('bp.book_appointment') }}">Book Appointment</a>
+        <a href="{{ url_for('bp.rebook_appointment') }}">ReBook Appointment</a>
+        <a href="{{ url_for('bp.cancel_appointment') }}">Cancel Appointment</a>
+        <a href="{{ url_for('bp.view_doctor_availability') }}">View Doctor Availability</a>
+        <a href="{{ url_for('bp.edit_availability') }}" class="active">Edit Availability</a>
+        <a href="{{ url_for('bp.consultations') }}">Start Consultation</a>
+        <a href="{{ url_for('bp.view_medical_history') }}">View Medical History</a>
+    </div>
+
+    <div class="main-content">
+        <div class="flash-messages">
+            <!-- Flash messages here -->
+        </div>
+
+        <h1>Welcome to MedHub</h1>
+
+        <div class="dashboard">
+            <div class="tile-container">
+                <div class="tile">
+                    <h2>Consultation Overview</h2>
+                    <p>Manage and view your consultations with doctors.</p>
+                    <a href="{{ url_for('bp.consultations') }}" class="button">View Consultations</a>
+                </div>
+                <div class="tile">
+                    <h2>Appointments</h2>
+                    <p>book and manage your appointments easily.</p>
+                    <a href="{{ url_for('bp.book_appointment') }}" class="button">Book Appointment</a>
+                </div>
+                <div class="dashboard-item">
+                    <h2>Medical Tip of the Day</h2>
+                    <p id="medicalTip"></p>
+                </div>
+            </div>
+
+            <!-- Calendar Card HTML -->
+            <div class="dashboard-item calendar-card">
+                <h2>Appointment Calendar</h2>
+                <div id="calendar"></div>
+            </div>
+
+            <div class="progress-container">
+                <h2>Progress Towards Health Goals</h2>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 70%;"></div>
+                </div>
+                <p>70% to your goal!</p>
+            </div>
+
+            <div class="activity-feed">
+                <h2>Activity Feed</h2>
+                <ul>
+                    <li>Consultation with Dr. Smith bookd for September 10th.</li>
+                    <li>Health goal achieved: 5,000 steps a day for a week.</li>
+                    <li>Appointment with Dr. Johnson completed on August 30th.</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="more-link">
+            <a href="{{ url_for('bp.forum') }}">See more features</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 MedHub - All rights reserved. <span class="footer-link">Privacy Policy</span></p>
+    </footer>
+
+    <script>
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const sidebar = document.getElementById('sidebar');
+        
+        sidebarToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            },
+            events: [
+                {
+                    title: 'Consultation with Dr. Smith',
+                    start: '2024-09-10T10:00:00',
+                    end: '2024-09-10T11:00:00'
+                },
+                {
+                    title: 'Health Checkup',
+                    start: '2024-09-12T14:00:00',
+                    end: '2024-09-12T15:00:00'
+                }
+                // Add more events here
+            ],
+            eventColor: '#ff867c', // Customize the color of events
+            eventTextColor: '#ffffff' // Customize the text color of events
+        });
+
+        calendar.render();
+    });
+    const healthTips = [
+        "Drink plenty of water throughout the day.",
+        "Aim for at least 30 minutes of exercise each day.",
+        "Eat a balanced diet rich in fruits and vegetables.",
+        "Get at least 7-8 hours of sleep each night.",
+        "Practice mindfulness and stress-reducing techniques.",
+        "Avoid excessive consumption of sugary and processed foods.",
+        "Maintain a healthy weight through diet and exercise.",
+        "Schedule regular check-ups with your healthcare provider.",
+        "Avoid smoking and limit alcohol consumption.",
+        "Stay up to date with vaccinations and preventive care."
+    ];
+
+    function getRandomTip() {
+        const randomIndex = Math.floor(Math.random() * healthTips.length);
+        return healthTips[randomIndex];
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const tipContainer = document.getElementById('medicalTip');
+        tipContainer.textContent = getRandomTip();
+    });
+    </script>
+<footer>
+    <div class="footer-links">
+        <p>&copy; 2024 MedHub. All rights reserved.</p>
+        <a href="{{ url_for('bp.index') }}">Back Home</a>
+        <a href="{{ url_for('bp.privacy_policy') }}">Privacy Policy</a>
+        <a href="{{ url_for('bp.terms_of_service') }}">Terms of Service</a>
+        <a href="{{ url_for('bp.support') }}">Get Support</a>
+        <a href="{{ url_for('bp.view_medical_history') }}">View Medical History</a>
+        <a href="{{ url_for('bp.forum') }}">Forums</a>
+        <a href="{{ url_for('bp.contact_us') }}">Contact Us</a>
+    </div>
+</footer>
+
+
+
+
+</body>
+</html>

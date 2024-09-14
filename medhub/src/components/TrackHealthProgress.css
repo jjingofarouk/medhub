@@ -1,0 +1,75 @@
+.track-health-progress {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.track-health-progress h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.progress-summary {
+    margin-bottom: 20px;
+}
+
+.progress-summary h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.progress-summary table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.progress-summary th, .progress-summary td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.progress-summary th {
+    background-color: #f4f4f4;
+}
+
+.add-entry {
+    border-top: 2px solid #2e5668; /* Dark Teal */
+    padding-top: 20px;
+}
+
+.add-entry h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.add-entry form {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-entry label {
+    margin-bottom: 10px;
+}
+
+.add-entry input {
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.add-entry button {
+    padding: 10px;
+    background-color: #2e5668; /* Dark Teal */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.add-entry button:hover {
+    background-color: #1c3d4a; /* Darker Teal */
+}

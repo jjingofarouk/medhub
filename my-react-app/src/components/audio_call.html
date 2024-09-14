@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Call</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        /* Audio Call Page Styles */
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #2e5668;
+            color: #fff;
+            text-align: center;
+            padding: 15px 0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .call-container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .call-container h1 {
+            color: #2e5668;
+            margin-bottom: 20px;
+        }
+
+        .call-info {
+            margin-bottom: 20px;
+        }
+
+        .call-info p {
+            margin: 10px 0;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #ff867c; /* Coral */
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #e7556f; /* Darker Coral */
+        }
+
+        .footer {
+            margin-top: 20px;
+        }
+
+        .footer a {
+            color: #2e5668;
+            text-decoration: none;
+            font-size: 14px;
+            margin: 0 10px;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            background-color: #2e5668; /* Dark Teal */
+            color: #ffffff;
+            text-align: center;
+            padding: 20px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <a href="{{ url_for('bp.index') }}"><h2>MedHub</h2></a>
+        <a href="{{ url_for('bp.manage_appointments') }}">Manage Appointments</a>
+        <a href="{{ url_for('bp.book_appointment') }}">Book Appointment</a>
+        <a href="{{ url_for('bp.rebook_appointment') }}">ReBook Appointment</a>
+        <a href="{{ url_for('bp.cancel_appointment') }}">Cancel Appointment</a>
+        <a href="{{ url_for('bp.view_doctor_availability') }}">View Doctor Availability</a>
+        <a href="{{ url_for('bp.edit_availability') }}" class="active">Edit Availability</a>
+        <a href="{{ url_for('bp.consultations') }}">Start Consultation</a>
+        <a href="{{ url_for('bp.view_medical_history') }}">View Medical History</a>
+    </div>
+    <header>
+        <h1>Audio Call</h1>
+    </header>
+
+    <div class="container">
+        <div class="call-container">
+            <h1>Start Audio Call</h1>
+            <div class="call-info">
+                <p><strong>Doctor:</strong> {{ consultation.doctor.name }}</p>
+                <p><strong>Patient:</strong> {{ consultation.patient.name }}</p>
+                <p><strong>Appointment ID:</strong> {{ consultation.consultation.id }}</p>
+            </div>
+            <a href="#" class="button">Start Call</a>
+            <a href="{{ url_for('bp.index') }}" class="button">Back to Dashboard</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 MedHub. All rights reserved.</p>
+        <a href="{{ url_for('bp.index') }}">Back Home</a>
+        <a href="{{ url_for('bp.privacy_policy') }}">Privacy Policy</a>
+        <a href="{{ url_for('bp.terms_of_service') }}">Terms of Service</a>
+        <a href="{{ url_for('bp.support') }}">Get Support</a>
+        <a href="{{ url_for('bp.view_medical_history') }}">View Medical History</a>
+        <a href="{{ url_for('bp.forum') }}">Forums</a>
+        <a href="{{ url_for('bp.contact_us') }}">Contact Us</a>
+    </footer>
+</body>
+</html>
+

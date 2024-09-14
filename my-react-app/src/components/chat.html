@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedHub Chat - WhatsApp Style</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Existing styles */
+        /* WhatsApp-inspired color scheme with your original colors */
+        :root {
+    --light-yellow: #ffeaac;
+    --dark-teal: #2e5668;
+    --coral: #ff867c;
+    --light-teal: #95ccc5;
+    --light-pink: #ffd5d5;
+    --chat-bg: #ece5dd;
+    --input-bg: #f0f0f0;
+    --msg-sender-bg: var(--coral);
+    --msg-receiver-bg: var(--light-teal);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: #b2d8d8;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling */
+}
+
+.msger {
+    width: 100%;
+    max-width: 600px;
+    height: 90vh;
+    background: var(--light-yellow);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.msger-header {
+    background: var(--dark-teal);
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2em;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.msger-header .settings-btn {
+    cursor: pointer;
+}
+
+.settings-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.settings-content {
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    max-width: 400px;
+    width: 100%;
+    position: relative;
+}
+
+.settings-content h2 {
+    margin-top: 0;
+}
+
+.settings-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--coral);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.settings-content label {
+    display: block;
+    margin: 10px 0;
+}
+
+.settings-content input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.settings-content .theme-selector {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.settings-content .theme-option {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.settings-content .theme-option input {
+    display: none;
+}
+
+.settings-content .theme-option label {
+    background: #ccc;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.msger-chat {
+    flex: 1;
+    padding: 20px;
+    background: var(--chat-bg);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.msg {
+    display: flex;
+    align-items: flex-start;
+    padding: 10px;
+    border-radius: 20px;
+    max-width: 80%;
+    word-wrap: break-word;
+}
+
+.msg-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    margin-right: 10px;
+}
+
+.msg-bubble {
+    padding: 10px;
+    border-radius: 20px;
+    background-color: #66b2b2;
+}
+
+.msg-text {
+    margin: 0;
+    font-size: 1em;
+}
+
+.msg.right-msg {
+    margin-left: auto;
+    background-color: #006666;
+    color: white;
+    border-bottom-right-radius: 0;
+}
+
+.msg.left-msg {
+    background-color: #ECE5DD;
+    color: black;
+    border-bottom-left-radius: 0;
+}
+
+.msger-inputarea {
+    background: var(--input-bg);
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #ddd;
+}
+
+.msger-input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    background: white;
+    margin-right: 10px;
+    font-size: 1em;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.msger-send-btn {
+    background: #2e5668;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.msger-send-btn:hover {
+    background-color: var(--coral);
+}
+
+.msger-media-btns {
+    display: flex;
+    gap: 10px;
+    margin-left: 10px;
+}
+
+.msger-media-btns label {
+    background: var(--dark-teal);
+    color: white;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2em;
+}
+
+.msger-chat::-webkit-scrollbar {
+    width: 5px;
+}
+
+.msger-chat::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.msger-chat::-webkit-scrollbar-track {
+    background: var(--chat-bg);
+}
+
+.settings-content .theme-option input:checked + label {
+    border: 2px solid var(--dark-teal);
+}
+
+footer {
+    background-color: #2e5668;
+    color: #ffffff;
+    text-align: center;
+    padding: 20px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
+footer a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 14px;
+}
+
+footer a:hover {
+    text-decoration: underline;
+    color: #ff867c;
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+   
+        
+        /* Rest of the styles remain unchanged */
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <a href="{{ url_for('bp.index') }}"><h2>MedHub</h2></a>
+        <a href="{{ url_for('bp.manage_appointments') }}">Manage Appointments</a>
+        <a href="{{ url_for('bp.book_appointment') }}">Book Appointment</a>
+        <a href="{{ url_for('bp.rebook_appointment') }}">ReBook Appointment</a>
+        <a href="{{ url_for('bp.cancel_appointment') }}">Cancel Appointment</a>
+        <a href="{{ url_for('bp.view_doctor_availability') }}">View Doctor Availability</a>
+        <a href="{{ url_for('bp.edit_availability') }}" class="active">Edit Availability</a>
+        <a href="{{ url_for('bp.consultations') }}">Start Consultation</a>
+        <a href="{{ url_for('bp.view_medical_history') }}">View Medical History</a>
+    </div>
+    
+
+    <section class="msger">
+        <header class="msger-header">
+            <div class="msger-header-title">
+                <i class="fas fa-comment-alt"></i> MedHub Chat
+            </div>
+            <div class="msger-header-options">
+                <span class="settings-btn"><i class="fas fa-cog"></i></span>
+            </div>
+        </header>
+
+        <main class="msger-chat">
+            <!-- Messages will appear here -->
+        </main>
+
+        <form class="msger-inputarea">
+            <input type="text" class="msger-input" placeholder="Type your message...">
+            <div class="msger-media-btns">
+                <label for="file-upload"><i class="fas fa-image"></i></label>
+                <input type="file" id="file-upload" style="display:none" accept="image/*">
+                
+                <label for="audio-upload"><i class="fas fa-microphone"></i></label>
+                <input type="file" id="audio-upload" style="display:none" accept="audio/*">
+            </div>
+            <button type="submit" class="msger-send-btn">Send</button>
+        </form>
+    </section>
+
+    <div class="settings-modal">
+        <div class="settings-content">
+            <button class="settings-close-btn">&times;</button>
+            <h2>Settings</h2>
+            <label>
+                <input type="checkbox" id="notifications">
+                Enable Notifications
+            </label>
+            <label>
+                <input type="checkbox" id="save-chat-history">
+                Save Chat History
+            </label>
+            <h3>Theme</h3>
+            <div class="theme-selector">
+                <div class="theme-option">
+                    <input type="radio" id="theme-light" name="theme" value="light" checked>
+                    <label for="theme-light" style="background: var(--light-yellow);"></label>
+                    Light
+                </div>
+                <div class="theme-option">
+                    <input type="radio" id="theme-dark" name="theme" value="dark">
+                    <label for="theme-dark" style="background: var(--dark-teal);"></label>
+                    Dark
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <p>&copy; 2024 MedHub. All rights reserved.</p>
+            <a href="{{ url_for('bp.index') }}">Back Home</a>
+            <a href="{{ url_for('bp.privacy_policy') }}">Privacy Policy</a>
+            <a href="{{ url_for('bp.terms_of_service') }}">Terms of Service</a>
+            <a href="{{ url_for('bp.support') }}">Get Support</a>
+            <a href="{{ url_for('bp.view_medical_history') }}">View Medical History</a>
+            <a href="{{ url_for('bp.forum') }}">Forums</a>
+            <a href="{{ url_for('bp.contact_us') }}">Contact Us</a>
+        </div>
+    </footer>
+
+    <script>
+        const msgerForm = document.querySelector(".msger-inputarea");
+        const msgerInput = document.querySelector(".msger-input");
+        const msgerChat = document.querySelector(".msger-chat");
+        const settingsBtn = document.querySelector(".settings-btn");
+        const settingsModal = document.querySelector(".settings-modal");
+        const settingsCloseBtn = document.querySelector(".settings-close-btn");
+
+        const BOT_MSGS = [
+            "Hi, how are you?",
+            "Ohh... I can't understand what you're trying to say. Sorry!",
+            "I like to play games... But I don't know how to play!",
+            "Sorry if my answers are not relevant. :))",
+            "I feel sleepy! :("
+        ];
+
+        const BOT_IMG = "https://image.flaticon.com/icons/svg/327/327779.svg";
+        const PERSON_IMG = "https://image.flaticon.com/icons/svg/145/145867.svg";
+        const BOT_NAME = "Bot";
+        const PERSON_NAME = "You"; // Update this if needed
+
+        msgerForm.addEventListener("submit", event => {
+            event.preventDefault();
+
+            const msgText = msgerInput.value;
+            if (!msgText) return;
+
+            appendMessage(PERSON_NAME, PERSON_IMG, "right-msg", msgText);
+            msgerInput.value = "";
+
+            botResponse();
+        });
+
+        function appendMessage(name, img, side, text) {
+            const msgHTML = `
+                <div class="msg ${side}">
+                    <div class="msg-img" style="background-image: url(${img})"></div>
+                    <div class="msg-bubble">
+                        <div class="msg-text">${text}</div>
+                    </div>
+                </div>
+            `;
+
+            msgerChat.insertAdjacentHTML("beforeend", msgHTML);
+            msgerChat.scrollTop = msgerChat.scrollHeight;
+        }
+
+        function botResponse() {
+            const r = random(0, BOT_MSGS.length - 1);
+            const msgText = BOT_MSGS[r];
+            const delay = msgText.split(" ").length * 100;
+
+            setTimeout(() => {
+                appendMessage(BOT_NAME, BOT_IMG, "left-msg", msgText);
+            }, delay);
+        }
+
+        function random(min, max) {
+            return Math.floor(Math.random() * (max - min) + min);
+        }
+
+        settingsBtn.addEventListener("click", () => {
+            settingsModal.style.display = "flex";
+        });
+
+        settingsCloseBtn.addEventListener("click", () => {
+            settingsModal.style.display = "none";
+        });
+
+        // Handle settings changes
+        document.querySelector("#notifications").addEventListener("change", (e) => {
+            if (e.target.checked) {
+                alert("Notifications enabled");
+            } else {
+                alert("Notifications disabled");
+            }
+        });
+
+        document.querySelector("#save-chat-history").addEventListener("change", (e) => {
+            if (e.target.checked) {
+                alert("Chat history will be saved");
+            } else {
+                alert("Chat history will not be saved");
+            }
+        });
+
+        document.querySelectorAll(".theme-option input").forEach((input) => {
+            input.addEventListener("change", (e) => {
+                if (e.target.checked) {
+                    const theme = e.target.value;
+                    if (theme === "light") {
+                        document.body.style.backgroundColor = "#b2d8d8"; // Light theme color
+                    } else {
+                        document.body.style.backgroundColor = "#2e5668"; // Dark theme color
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+    
+    <title>Video Call</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0; /* Light grey background */
+            color: #2e5668; /* Dark Teal for text */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensure the body takes up full viewport height */
+            text-align: center;
+        }
+        header {
+            background-color: #2e5668; /* Dark Teal */
+            color: #fff; /* White text */
+            padding: 5px 20px; /* Reduced padding for a smaller header */
+            display: flex;
+            justify-content: space-between; /* Distribute space between items */
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow for the header */
+            z-index: 1000; /* Ensure header stays above other content */
+            font-size: 1em; /* Adjust font size for the header */
+            height: 50px; /* Reduced height for the header */
+            box-sizing: border-box; /* Ensure padding is included in height */
+        }
+        header h1 {
+            margin: 0; /* Remove default margin */
+            font-size: 1.2em; /* Slightly larger font size for the header title */
+            text-align: center; /* Center align the title text */
+            flex-grow: 1; /* Allow the title to take up remaining space */
+        }
+        header a {
+            color: #ffd5d5; /* Light Pink for the link */
+            text-decoration: none;
+            font-weight: bold;
+            margin-left: auto; /* Push the link to the right */
+        }
+        header a:hover {
+            text-decoration: underline;
+        }
+        main {
+            flex: 1; /* Allow main content to take up available space */
+            padding: 50px 20px 50px; /* Space for the fixed header and footer */
+            box-sizing: border-box; /* Ensure padding is included in height */
+        }
+        #jitsi-meet {
+            width: 90%; /* Adjust width for a more balanced layout */
+            max-width: 1200px; /* Limit maximum width */
+            height: calc(100vh - 100px); /* Adjust height to use available space minus header and footer */
+            border: none;
+            border-radius: 15px; /* Rounded edges for the iframe */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow for the iframe */
+            margin: 0 auto; /* Center the iframe */
+        }
+        footer {
+            background-color: #2e5668; /* Dark Teal */
+            color: #fff; /* White text */
+            text-align: center;
+            padding: 10px 20px; /* Padding for the footer */
+            font-size: 0.9em; /* Slightly smaller font size for the footer */
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow for the footer */
+            box-sizing: border-box; /* Ensure padding is included in height */
+        }
+    </style>
+</head>
+<body>
+    {% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+      <ul class="flashes">
+        {% for category, message in messages %}
+          <li class="flash {{ category }}">{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+    <header>
+        <div>MedHub</div>
+        <h1>Join a Video Call</h1>
+        <a href="{{ url_for('bp.index') }}">Back to Home</a>
+    </header>
+    <main>
+        <iframe
+            id="jitsi-meet"
+            src="https://meet.jit.si/medhubroom"
+            allow="camera; microphone; fullscreen; display-capture"
+            frameborder="0">
+        </iframe>
+    </main>
+    <footer>
+        <div class="footer-links">
+            <p>&copy; 2024 MedHub. All rights reserved.</p>
+            <a href="{{ url_for('bp.index') }}">Back Home</a>
+            <a href="{{ url_for('bp.privacy_policy') }}">Privacy Policy</a>
+            <a href="{{ url_for('bp.terms_of_service') }}">Terms of Service</a>
+            <a href="{{ url_for('bp.support') }}">Get Support</a>
+            <a href="{{ url_for('bp.view_medical_history') }}">View Medical History</a>
+            <a href="{{ url_for('bp.forum') }}">Forums</a>
+            <a href="{{ url_for('bp.contact_us') }}">Contact Us</a>
+        </div>
+    </footer>
+    
+    
+</body>
+</html>

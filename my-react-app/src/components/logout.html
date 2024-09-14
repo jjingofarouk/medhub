@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout | MedHub</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <button class="sidebar-toggle" id="sidebarToggle">&#9776;</button>
+
+    <div class="sidebar" id="sidebar">
+        <h2>MedHub</h2>
+        <a href="{{ url_for('bp.consultations') }}"><i class="fas fa-stethoscope"></i> Consultations</a>
+        <a href="{{ url_for('bp.book_appointments') }}"><i class="fas fa-calendar-alt"></i> Book Appointments</a>
+        <a href="{{ url_for('bp.set_health_goals') }}"><i class="fas fa-bullseye"></i> Set Health Goals</a>
+        <a href="{{ url_for('bp.privacy_policy') }}"><i class="fas fa-ellipsis-h"></i> Privacy Policy</a>
+    </div>
+
+    <div class="main-content">
+        <h1>Logout</h1>
+        <div class="summary-card">
+            <h2>You have been logged out</h2>
+            <p>Thank you for using MedHub. We hope to see you again soon.</p>
+            <a href="{{ url_for('bp.login') }}" class="button">Login Again</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <p>&copy; 2024 MedHub. All rights reserved.</p>
+            <a href="{{ url_for('bp.index') }}">Back Home</a>
+            <a href="{{ url_for('bp.privacy_policy') }}">Privacy Policy</a>
+            <a href="{{ url_for('bp.terms_of_service') }}">Terms of Service</a>
+            <a href="{{ url_for('bp.support') }}">Get Support</a>
+            <a href="{{ url_for('bp.view_medical_history') }}">View Medical History</a>
+            <a href="{{ url_for('bp.forum') }}">Forums</a>
+            <a href="{{ url_for('bp.contact_us') }}">Contact Us</a>
+        </div>
+    </footer>
+    
+
+    
+    
+
+    <script>
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const sidebar = document.getElementById('sidebar');
+
+        sidebarToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+        });
+    </script>
+</body>
+</html>

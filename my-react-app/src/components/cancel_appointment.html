@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancel Appointment</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #2e5668; /* Dark Teal */
+            color: #fff;
+            position: fixed;
+            height: 100%;
+            padding: 15px;
+        }
+
+        .sidebar h2 {
+            margin-top: 0;
+        }
+
+        .sidebar a {
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .sidebar a.active, .sidebar a:hover {
+            background-color: #ff867c; /* Coral */
+        }
+
+        .container {
+            margin-left: 270px;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #2e5668; /* Dark Teal */
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-info {
+            background-color: #ff867c; /* Coral */
+        }
+
+        .btn-secondary {
+            background-color: #2e5668; /* Dark Teal */
+            border: none;
+        }
+
+        footer {
+    background-color: #2e5668; /* Dark Teal */
+    color: #ffffff;
+    text-align: center;
+    padding: 20px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
+footer a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 14px;
+}
+
+footer a:hover {
+    text-decoration: underline;
+    color: #ff867c; /* Coral */
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <a href="{{ url_for('bp.index') }}"><h2>MedHub</h2></a>
+        <a href="{{ url_for('bp.manage_appointments') }}">Manage Appointments</a>
+        <a href="{{ url_for('bp.book_appointment') }}">Book Appointment</a>
+        <a href="{{ url_for('bp.rebook_appointment') }}">ReBook Appointment</a>
+        <a href="{{ url_for('bp.cancel_appointment') }}">Cancel Appointment</a>
+        <a href="{{ url_for('bp.view_doctor_availability') }}">View Doctor Availability</a>
+        <a href="{{ url_for('bp.edit_availability') }}" class="active">Edit Availability</a>
+        <a href="{{ url_for('bp.consultations') }}">Start Consultation</a>
+        <a href="{{ url_for('bp.view_medical_history') }}">View Medical History</a>
+    </div>
+    <div class="container">
+        <h1>Cancel Appointment</h1>
+        
+        <!-- Cancel Appointment Form -->
+        <form method="POST" action="{{ url_for('bp.cancel_appointment') }}" id="cancel-form">
+            <h2>Cancel Appointment</h2>
+            <div class="form-group">
+                <label for="appointment_id">Appointment ID:</label>
+                <input type="text" id="appointment_id" name="appointment_id" required>
+            </div>
+            <div class="form-group">
+                <label for="cancellation_reason">Reason for Cancellation:</label>
+                <select id="cancellation_reason" name="cancellation_reason" required>
+                    <option value="">Select a reason</option>
+                    <option value="Schedule Conflict">Schedule Conflict</option>
+                    <option value="Personal Reasons">Personal Reasons</option>
+                    <option value="Doctor Availability">Doctor Availability</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <input type="submit" value="Cancel Appointment" class="btn btn-info" id="cancel-btn">
+        </form>
+
+        <a href="{{ url_for('bp.index') }}" class="btn btn-secondary">Back to Home</a>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <p>&copy; 2024 MedHub. All rights reserved.</p>
+            <a href="{{ url_for('bp.index') }}">Back Home</a>
+            <a href="{{ url_for('bp.privacy_policy') }}">Privacy Policy</a>
+            <a href="{{ url_for('bp.terms_of_service') }}">Terms of Service</a>
+            <a href="{{ url_for('bp.support') }}">Get Support</a>
+            <a href="{{ url_for('bp.view_medical_history') }}">View Medical History</a>
+            <a href="{{ url_for('bp.forum') }}">Forums</a>
+            <a href="{{ url_for('bp.contact_us') }}">Contact Us</a>
+        </div>
+    </footer>
+    
+    
+
+    <script>
+        $(document).ready(function() {
+            // Handle form submission
+            $('#cancel-btn').click(function(event) {
+                // Validate form before submission
+                var appointmentId = $('#appointment_id').val();
+                if (!appointmentId) {
+                    alert('Please enter a valid Appointment ID.');
+                    event.preventDefault(); // Prevent form submission
+                }
+            });
+        });
+    </script>
+</body>
+</html>

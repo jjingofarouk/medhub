@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}MedHub{% endblock %}</title>
+    {% block head %}{% endblock %}
+    <style>
+        footer {
+    background-color: #2e5668; /* Dark Teal */
+    color: #ffffff;
+    text-align: center;
+    padding: 20px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
+footer a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 14px;
+}
+
+footer a:hover {
+    text-decoration: underline;
+    color: #ff867c; /* Coral */
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Menu</h2>
+        <a href="{{ url_for('bp.index') }}">Home</a>
+        <a href="{{ url_for('bp.signup') }}">Sign Up</a>
+        <a href="{{ url_for('bp.login') }}">Login</a>
+    </div>
+    <div class="main-content">
+        {% block content %}{% endblock %}
+    </div>
+    <footer>
+        <p>&copy; 2024 MedHub</p>
+    </footer>
+    <script src="{{ url_for('static', filename='js/signup.js') }}"></script>
+    {% block scripts %}{% endblock %}
+    <div class="footer">
+        <p>&copy; 2024 MedHub. All rights reserved.</p>
+        <a href="{{ url_for('bp.privacy_policy') }}">Privacy Policy</a>
+        <a href="{{ url_for('bp.terms_of_service') }}">Terms of Serivce</a>
+        <a href="{{ url_for('bp.support') }}">Get Support</a>
+        <a href="{{ url_for('bp.view_medical_history') }}">View Medical History</a>
+        <a href="{{ url_for('bp.forum') }}">Forums</a>
+        <a href="{{ url_for('bp.contact_us') }}">Contact Us</a>
+    </div>
+    
+</body>
+</html>

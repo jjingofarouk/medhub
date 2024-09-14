@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+
+
+    
+    
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #ffeaac; /* Light yellow */
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #2e5668; /* Dark teal */
+            color: #fff;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar h2 {
+            margin-top: 0;
+            font-size: 24px;
+        }
+        .sidebar a {
+            text-decoration: none;
+            color: #ffeaac; /* Light yellow */
+            display: block;
+            padding: 10px 0;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+            border-radius: 4px;
+        }
+        .sidebar a:hover {
+            background-color: #00796B; /* Coral */
+        }
+        .main-content {
+            flex: 1;
+            background-color: #C4DAD2;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        .container {
+            background: #E9EFEC;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 100%;
+            margin: auto;
+            position: relative;
+        }
+        h1 {
+            color: #2e5668; /* Dark teal */
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .step-header {
+            font-size: 20px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #2e5668; /* Dark teal */
+            color: #2e5668; /* Dark teal */
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        input[type="submit"],
+        input[type="button"] {
+            background-color: #2e5668; /* Dark teal */
+            color: #fff;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        input[type="submit"]:hover,
+        input[type="button"]:hover {
+            background-color: #00796B; /* Coral */
+            transform: scale(1.05);
+        }
+        input[type="button"] {
+            background-color: #ff867c; /* Coral */
+            margin: 10px;
+        }
+        input[type="button"].hidden {
+            display: none;
+        }
+        .progress-container {
+            width: 100%;
+            height: 8px;
+            background-color: #ccc;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .progress-bar {
+            height: 100%;
+            width: 0;
+            background-color: #2e5668; /* Dark teal */
+            transition: width 0.3s ease;
+        }
+        .feedback {
+            margin: 15px 0;
+            font-size: 16px;
+            text-align: center;
+        }
+        .feedback.success {
+            color: #2e5668; /* Dark teal */
+        }
+        .feedback.error {
+            color: #ff867c; /* Coral */
+        }
+        footer {
+            background-color: #2e5668; /* Dark teal */
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            font-size: 14px;
+        }
+        footer p {
+            margin: 0;
+        }
+        @media (max-width: 600px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                box-shadow: none;
+            }
+            .main-content {
+                padding: 10px;
+            }
+            .container {
+                padding: 15px;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Menu</h2>
+        <a href="{{ url_for('bp.index') }}">Home</a>
+        <a href="{{ url_for('bp.signup') }}">Sign Up</a>
+        <a href="{{ url_for('bp.login') }}">Login</a>
+    </div>
+    <div class="main-content">
+        <div class="container">
+            <h1>Sign Up</h1>
+            <!-- Progress Bar -->
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <!-- Step Sections -->
+            <form id="signup-form" action="{{ url_for('bp.signup') }}" method="POST">
+                <!-- Step 1: Basic Information -->
+                <div class="step step-1 active">
+                    <div class="step-header">Step 1: Basic Information</div>
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                    <br>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                    <br>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="example@domain.com" required>
+                    <br>
+                </div>
+                <div class="feedback" id="feedback"></div>
+                <input type="button" value="Previous" id="prev-btn" onclick="changeStep(-1)" class="hidden">
+                <input type="button" value="Next" id="next-btn" onclick="changeStep(1)">
+                <input type="submit" value="Sign Up" id="submit-btn" class="hidden">
+            </form>
+            <p><a href="{{ url_for('bp.login') }}">Already have an account? Log in here</a></p>
+            <p><a href="{{ url_for('bp.index') }}">Back to Home</a></p>
+        </div>
+    </div>
+    <footer>
+        <div class="footer-links">
+            <p>&copy; 2024 MedHub. All rights reserved.</p>
+            <a href="{{ url_for('bp.index') }}">Back Home</a>
+            <a href="{{ url_for('bp.privacy_policy') }}">Privacy Policy</a>
+            <a href="{{ url_for('bp.terms_of_service') }}">Terms of Service</a>
+            <a href="{{ url_for('bp.support') }}">Get Support</a>
+            <a href="{{ url_for('bp.view_medical_history') }}">View Medical History</a>
+            <a href="{{ url_for('bp.forum') }}">Forums</a>
+            <a href="{{ url_for('bp.contact_us') }}">Contact Us</a>
+        </div>
+    </footer>
+    
+    
+    <script>
+        let currentStep = 1;
+        const totalSteps = 1; // Only one step for the updated form
+        const progressBar = document.getElementById('progress-bar');
+        const feedback = document.getElementById('feedback');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const submitBtn = document.getElementById('submit-btn');
+
+        function changeStep(step) {
+            document.querySelector(`.step-${currentStep}`).classList.remove('active');
+            currentStep += step;
+            if (currentStep > totalSteps) currentStep = totalSteps;
+            if (currentStep < 1) currentStep = 1;
+            document.querySelector(`.step-${currentStep}`).classList.add('active');
+
+            updateProgress();
+            prevBtn.classList.toggle('hidden', currentStep === 1);
+            nextBtn.classList.toggle('hidden', currentStep === totalSteps);
+            submitBtn.classList.toggle('hidden', currentStep < totalSteps);
+        }
+
+        function updateProgress() {
+            const progress = (currentStep / totalSteps) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        // Initial Setup
+        updateProgress();
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,139 @@
+/* Root Colors */
+:root {
+  --medium-teal: #287094;
+  --light-grey-green: #D4D4CE;
+  --very-light-grey: #F6F6F6;
+  --dark-teal: #023246;
+  --highlight-orange: #D8A25E;
+  --shadow: rgba(0, 0, 0, 0.15);
+  --transition: 0.3s ease;
+}
+
+/* Container */
+.doctor-availability-container {
+  padding: 20px;
+  background: linear-gradient(135deg, var(--light-grey-green), var(--very-light-grey));
+  border-radius: 15px;
+  box-shadow: 0 4px 15px var(--shadow);
+}
+
+/* Heading */
+.doctor-availability-container h2 {
+  color: var(--dark-teal);
+  margin-bottom: 10px;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+/* Paragraph */
+.doctor-availability-container p {
+  color: var(--medium-teal);
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+}
+
+/* Search Bar */
+.search-bar {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.search-bar input {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  border: 1px solid var(--medium-teal);
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color var(--transition);
+}
+
+.search-bar input:focus {
+  border-color: var(--dark-teal);
+  outline: none;
+}
+
+/* Availability Table */
+.availability-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.availability-table th, .availability-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--very-light-grey);
+  color: var(--dark-teal);
+}
+
+.availability-table th {
+  background-color: var(--medium-teal);
+  color: var(--very-light-grey);
+  font-weight: bold;
+}
+
+.availability-table tbody tr:hover {
+  background-color: var(--highlight-orange);
+  color: var(--very-light-grey);
+}
+
+.availability-table tbody tr:nth-child(odd) {
+  background-color: var(--very-light-grey);
+}
+
+/* Doctor Info */
+.doctor-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.doctor-photo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px var(--shadow);
+}
+
+.doctor-info span {
+  color: var(--dark-teal);
+  font-weight: bold;
+}
+
+/* Buttons */
+.book-btn, .learn-more-btn {
+  background-color: var(--medium-teal);
+  color: var(--very-light-grey);
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color var(--transition), transform var(--transition);
+  font-size: 0.9rem;
+  margin-right: 10px;
+}
+
+.book-btn:hover, .learn-more-btn:hover {
+  background-color: var(--dark-teal);
+  transform: scale(1.05);
+}
+
+.learn-more-btn {
+  background-color: var(--highlight-orange);
+  color: var(--dark-teal);
+}
+
+.learn-more-btn:hover {
+  background-color: var(--dark-teal);
+  color: var(--highlight-orange);
+}
+
+/* No Results */
+.no-results {
+  text-align: center;
+  color: var(--medium-teal);
+  font-style: italic;
+  padding: 20px;
+}
